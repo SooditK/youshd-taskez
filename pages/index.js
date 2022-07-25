@@ -163,6 +163,14 @@ export default function Home() {
 export async function getServerSideProps(context) {
   const cookies = context.req.headers.cookie;
   console.log("COKI", context.req.headers.cookie);
+  if (!cookies) {
+    return {
+      redirect: {
+        destination: "/signin",
+        permanent: false,
+      },
+    };
+  }
   let token = cookies.split(";").find((c) => c.trim().startsWith("taskez="));
   if (token) {
     token = token.split("=")[1];
