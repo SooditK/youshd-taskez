@@ -177,14 +177,19 @@ export async function getServerSideProps(context) {
       };
     } else {
       //redirect to login page;
-      context.res.writeHead(302, {
-        Location: "/signin",
-      });
+      return {
+        redirect: {
+          destination: "/signin",
+          permanent: false,
+        },
+      };
     }
-  } else {
-    //redirect to login page;
-    context.res.writeHead(302, {
-      Location: "/signin",
-    });
   }
+  //redirect to login page;
+  return {
+    redirect: {
+      destination: "/signin",
+      permanent: false,
+    },
+  };
 }
